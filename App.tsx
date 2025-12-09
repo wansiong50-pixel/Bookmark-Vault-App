@@ -520,6 +520,10 @@ const App: React.FC = () => {
             if (activeCollection === id) {
               setActiveCollection('all');
             }
+            // Move bookmarks in this collection to 'all' (uncategorized)
+            setBookmarks(prev => prev.map(b =>
+              b.collectionId === id ? { ...b, collectionId: 'all' } : b
+            ));
             setCollections(prev => prev.filter(c => c.id !== id));
           }}
           onOpenSettings={() => setIsSettingsOpen(true)}
